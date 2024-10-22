@@ -1,0 +1,133 @@
+
+"   __   _(_)_ __ ___  _ __ ___ 
+"  \ \ / / | '_ ` _ \| '__/ __|
+"  \ V /| | | | | | | | | (__ 
+"  \_/ |_|_| |_| |_|_|  \___|)
+"       -AndiKod 2025-
+
+
+
+" --- &:OPTIONS --- :
+
+set nocompatible        " Disable Vi back compatibility
+filetype on             " Enable file type detection
+filetype plugin on      " Enable plugins according to filetype
+syntax on
+set number              " Line numbers
+set relativenumber
+set mouse=a             " Allow Mickey
+" set cursorline        " Current line highlight
+let &t_SI = "\e[6 q"    " Thin cursor for Insert mode 
+let &t_EI = "\e[2 q"
+set ts=2 sts=2 sw=2     " Tabs & Indent by 2 Spaces
+set et ai si
+
+" --- &:PLUGINS --- :
+
+" If VimPlug not here, download it.
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" Actual Plugins list:
+call plug#begin()
+	Plug 'ap/vim-buftabline'
+	Plug 'junegunn/fzf'
+	Plug 'junegunn/fzf.vim'
+	Plug 'jiangmiao/auto-pairs'
+	Plug 'sainnhe/vim-color-forest-night'
+	Plug 'scrooloose/nerdtree'
+	Plug 'ryanoasis/vim-devicons'
+	Plug 'PhilRunninger/nerdtree-visual-selection'
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+call plug#end()
+
+" Trying something
+" from: thevaluable.dev/fzf-vim-integration
+set rtp+=/usr/bin/fzf
+" and it works :)
+
+" --- &:MAPPINGS --- :
+
+let mapleader = " "
+inoremap jj <Esc>
+
+" Edit .vimrc Settings
+nnoremap <leader>rc :e ~/.vimrc <CR>
+
+" CtrS from both modes and back to Normal
+nnoremap <C-s> :w <CR>
+inoremap <C-s> <Esc> :w <CR>
+
+" Navigate the splits
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+
+" --- &:Plugins specific Mappings & Conf ---
+
+" &:BuffTabline
+set hidden
+nnoremap <tab> :bnext<CR>
+nnoremap <s><tab> :bprev<CR>
+
+" &:FzF
+" :Files {directory} to search outside
+
+" Find Files (inside the project)
+nnoremap <leader>ff :Files<cr>
+" Find GitFiles
+nnoremap <leader>fg :GFiles<cr>
+" Find sometimes opened files
+nnoremap <leader>fh :History<cr>
+" Search trough all open buffers
+nnoremap <leader>sb :Buffers<cr>
+" Search trough the content of all open buffers
+nnoremap <leader>sl :Lines<cr>
+" Search trough the content of the current bufferx
+nnoremap <leader>sc :BLines<cr>
+
+ 
+" &:BuffLine
+" Close a buffer
+nnoremap <leader>x :bd <cr>
+
+" &:NerdTree
+nnoremap <leader>e :NERDTreeToggle<CR>
+
+" NerdTree Files management
+" Hit m when hovering a file/folder
+" Pick the needed option: a to add, etc
+
+" &:COC Completion by Tab
+" C-n or C-p for next/previous 
+inoremap <silent><expr> <tab> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+
+" &:Emmet
+" Expand with <C-y>
+" Nav <C-n> <C-p>
+
+"  &:Colorscheme Everforest
+" Theme. see :help everforest.txt
+if has('termguicolors')
+  set termguicolors
+endif
+
+" For dark version.
+ set background=dark
+
+" For light version.
+" set background=light
+
+" Set contrast.
+" This configuration option should be placed before `colorscheme everforest`.
+" Available values: 'hard', 'medium'(default), 'soft'
+let g:everforest_background = 'soft'
+
+" For better performance
+let g:everforest_better_performance = 1
+
+colorscheme everforest
