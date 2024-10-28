@@ -1,78 +1,130 @@
-# My little .vimrc
 
-Exploring "good ol'Vim" for modern webDev 
+# myVIMRC for WebDev & more
 
-*Long story short...*
+Long story short. Tried some starter setups for NeoVim like [NVChad](https://nvchad.com), and it felt both great and unnecessary bloatted. Spending more time on configuration than coding, or ending up with a heavy setup ..."just in case".
 
-Coding since the early 90', went trough all the popular and less popular editors for webDev, and obviously tried to get into Vim. Got at some point annoyed by the "vim vs neovim" reddit style disputes and went back to the evil VSCode with Vim keybinds. I know, it's heresy level.
+So I grabbed [Vim9 from here](https://www.vim.org/download.php), threw at it a little vimrc, few plugins and bindings. At first wanted to see what can be done, but went well. It's an ongoing experiment now that covers the basics so far, almost on default settings.
 
-Lastly got tempted, installed NVChad just to see. It felt good to be fully back in the terminal but the whole setup felt also bloated and over-engineered. Sacrificing simplicity for the sake of questionable convenience is not always great.
+---/---
 
-So :)
+What was I looking for as a minimal viable editor, mostly WebDev:
 
-For the experiment, I got myself [Vim9.1](https://www.vim.org/download.php) and threw at it a basic .vimrc—less than 140 lines—with just enough tools to get things done as I would with something like NVChad or even TJ's Kickstarter, without complications. 
+- Ease of installation
+- Handful of logical keybinds
+- Simple plugins management
+- Browse/Manage local files
+- Jump to specific files & more
+- Visualise opened buffers & cycle
+- Highlight webDev files + bonus
+- Format on save with Prettier
+- Live lint/hint ts, css, ...
+- Autocompletion and Snippets
+- Tabnine AI suggestions
+- Easy to run parallel shell
+- Decent looking theme
+- Extendable to fit new needs
 
-Far from perfect or finished, saving it here as a reference along the journey.
+-- ~ --
 
----
+## Ease of installation
 
-The hole thing is structured in three sections:
+One simple `.vimrc` file. Open Vim, hit `:PlugInstall` and it's mostly done.
 
-## " --- &:OPTIONS ---
+Existing .vimrc file and things inside .vim folder should be saved aside, as the plugins will install themselves inside `~/.vim` folder.
 
-In this section we are setting the basic stuff like the spaces per tab, line numbers, etc. Sill some of them to add, but it's already functional.
+## Handful of logical keybinds
 
-## " --- &:PLUGINS ---
+Everything is documented in the vimrc, <br/>
+**" --- &:MAPPINGS ---** section.
 
-To stick with the KISS idea, it's [VimPlug](https://junegunn.github.io/vim-plug/) and a few needed packages.
+My muscle memory makes me hit "CtrS" to save a file, so I kept it that way.`<c-s>` will save the current buffer from either Normal or Insert mode, and end up in Normal mode anyway all while formatting the file with Prettier if needed.
 
-### [BuffTabline](https://github.com/ap/vim-buftabline)
+With the `<leader>` key set as `<space>`, there are some convenient keybinds for the basic actions like toggling the files explorer or the fuzzy finder, closing the current buffer, opening the vimrc to change some setups, etc.
 
-Each opened buffer have it's own visual tab, `<tab>` key cycle through them, and `<leader>x` close the active buffer if the modifications are saved.
+## Simple plugins management
 
-### [FzF FuzzyFinder](https://github.com/junegunn/fzf)
+Went for the simplest and well documented [VimPlug](https://vimplug.com).<br/>
+If not installed, it will install itself.
 
-The swiss knife when it comes to find/open/searchInside files in the project or more. It finds files, search within the content, history, ++. On my machine I did installed the binary globally. 
+```vim
+" --- &:PLUGINS ---
 
-Normally it's all you need for files browsing and content exploration. `<leader>ff` will "FindFiles", `<leader>sc` do "Search inside Current" buffer, etc.
+call plug#begin()
 
-### [NerdTree](https://github.com/preservim/nerdtree)
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'ap/vim-buftabline'
+  Plug 'junegunn/fzf'
+  Plug 'junegunn/fzf.vim'
+  Plug 'scrooloose/nerdtree'
+  Plug 'ryanoasis/vim-devicons'
+  Plug 'PhilRunninger/nerdtree-visual-selection'
+  Plug 'vim-airline/vim-airline'
+  Plug 'jiangmiao/auto-pairs'
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-commentary'
+  Plug 'tpope/vim-fugitive'
+  Plug 'sainnhe/vim-color-forest-night'
+  Plug 'ap/vim-css-color'
 
-Not really needed as files browser, but have a files manager attached to it, allowing files CRUD operations. `<leader>e` toggle the sidebar, and pressing `m` will open a menu with the options like add/rename/../delete files or folders.
+call plug#end()
+```
 
-## [ForestNight Colorscheme](https://github.com/termlimit/vim-color-forest-night)
+From here, `:Plug` commands will help managing plugings, with things like _:PlugInstall_, _:PlugUpdate_, _:PlugClean_, etc.
 
-With the possibility to switch between light or dark version from the vimrc, out of the box a nice and pleasant colorscheme. Don't need dozens of colorschemes, and you can easily install a new one from [VimAwesome](https://vimawesome.com/?q=tag:colorscheme) by example.
+For things specific to a language like LSP's, Snippets, etc, I let [Conquer of Completion](https://github.com/neoclide/coq.nvim) doing the heavy lifting, while keeping the config simple and clean. Commands starting with `:Coc` will do a lot, with installing functionalities, listing others and acessing the `:CocConfig` file.
 
-### [COC-NVim](https://github.com/neoclide/coc.nvim) Toolbox
+Basic webDev setup would look like `:CocInstall coc-html coc-emmet coc-css coc-tsserver coc-snippets coc-prettier coc-eslint coc-tabnine` plus others like tailwind, unocss, astro, svelte, etc, or things for php, python or more. See [the documentation](https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions).
 
-This will let you install all you need, LSP's, Snippets, TabNine AI completions, Linting, and more from the [hsupported extensions list](https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions). Just go :CocInstall coc-tsserver coc-css coc-tailwindcss ...and it's mostly done by default. 
+## Browse/Manage local files
 
-`<C-n>` or `<C-p>` are used to cycle trough the suggestions, and `<tab>` selecting your favourite. This and other options like `k` hovering something that will give information about.
+`<leader>e` Toggles the Files[E]xplorer by [NerdTree](https://github.com/preservim/nerdtree) to open or manage files.
 
-### ...the rest
+Once in the menu, hitting `m` will open a second menu assisting with Create / Rename / Move / Delete files. Yet, for opening files, FzF is a better tool.
 
-Didn't even added a fancy AirLine tool for the moment, but VimAutopairs and thinking about other utilities.
+## Jump to specific files & more
 
-## " --- &:MAPPINGS (general, and plugin-specific) ---
+- `<leader>ff` [F]ind[F]iles with [FzF](https://github.com/junegunn/fzf.vim) FuzzyFinder inside the current project folder. FzF does a lot of other intersting things, not yet assigned to a keybind.
 
-The default leader key is here set to the `<space>` bar.
+- `<leader>sc` Will act as a super CtrF and [s]earch inside the [c]urrent buffer.
+- `<leader>ev` This will let you [e]dit the [v]imrc.
 
-`<leader>rc` will open .vimrc at any moment to access the settings. 
-From here if your file gets big, `<leader>sc` will open the FzF window to search for patterns in the current buffer. Searching for `&:` will list all sections, but can be a package name, a setting value like colorscheme, whatever.
+With `<leader>sc` search then for the `&:` pattern for direct links to main sections, `::` for topic sections like `" ::NerdTree ---`, or whatever keyword like `colorscheme`. Scrolling or using Vim's search way works too, of course :) Once done, `<c-s>` to save and `:so` to source and applly the changes.
 
-`<C-s>` it really does "CtrS" and save the current buffer modifications, before dropping us in normal mode wherever we came from (N or I).
+## Visualise opened buffers & cycle
 
-The custom `<Esc>` or `<C-c>` is actually set to `jj` but can of course be modified to whatever else. We won't start the "jj vs jk" debate. Use what you like ;)
+The [vim-buftabline](https://github.com/ap/vim-buftabline) pluging does just that. Opened buffers will be visually listed at the top of the screen as tabs-like things. The `<tab>` key will display the next one _(shift+tab the previous)_ and the custom bind `<leader>x` will close the buffer.
 
-For the Emmet tool installed via *:CocInstall coc-emmet* the codes are expanded with `<C-y>` and the navigation is done by the classic `<C-n>` and `<C-p>`.
+## Highlight webDev files + bonus
 
-When it comes to "Embedded or Floating Terminal", I mean, we already are in a Terminal. Just `<C-z>` and you're back in the shell to do whatever, `<fg>` get you back. Eventually open a new terminal tab if available, or simply *:! shell commands* for little things. 
+Syntax highlight will come from whatever is installed via specific coc-extensions or regular plugins. Most of time out of the box.
 
-`C + j,k,h ou l` will navigate between splits. Other binds will be added later.
+## Format on save with Prettier
 
------ Et Voilà -----
+The html, css, js/ts, formating is bound to `CtrS`. It will format and save the file. At any other moment, the `:Prettier` command is available. See [coc-prettier](https://github.com/neoclide/coc-prettier)
 
-It's more or less a starting point and this repo will be updated along the way as I'll try to keep "my little vimrc" up to date.
+## Live lint/hint ts, css, ...
 
-Feel free to experiment around, and happy Vimming ;)
+Just try some weird things, save, and TSServer or other might complain, with hints on what's wrong. In other contexts, hovering elements will give infos, plus the classic "gd for GoToDefinition" etc.
+
+## Autocompletion and Snippets
+
+Comming from [coc-snippets](https://github.com/neoclide/coc-snippets), other coc-extensions and plugins, quite some snippets are actives and `<tab>` will expand them, while `<c-p>` or `<c-n>` will move on the previous or next suggestion.
+
+It's also easy to add our own snippets, or use some of those written for VSCode.Actually looking into that part, to bring it in next.
+
+## Tabnine AI suggestions
+
+Once `:CocInstall coc-tabnine` it simply works, and bring in [the good stuff](https://www.tabnine.com/best-in-class-ai-code-generation/). I bet Vim is also "supported" now :)
+
+## Easy to run parallel shell
+
+After some tests, even if your emulator have tabs, [Tmux](https://www.youtube.com/watch?v=U41BTVZLKB0) is a way better, and simple option. Saving running setups of terminal sessions with running dev servers without having to restart them is priceless ...and actually free.
+
+## Decent looking theme
+
+Nobody needs 85 random colorschemes "out of the box". This setup comes with a clean theme—[ForestNight](https://github.com/termlimit/vim-color-forest-night)—in dark or light variants, yet [VimAwesome](https://vimawesome.com/?q=tag:color-scheme) is full of others. Easy enough to just add a colorscheme pluging and change the name in .vimrc
+
+## Extendable to fit new needs
+
+At the end of the day, it's just Vim. [It can do anything](https://learnvim.irian.to) but the coffee.
+
