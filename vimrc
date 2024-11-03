@@ -12,7 +12,7 @@
 "  - Playful little Vim for WebDev -
 " ------------------------------------------------- //
 " Version : 1.0.0
-" Licence : GPL
+" Licence : GPL (Do whatever, but keep it FOSS)
 " Author  : Andrei Curelaru aka AndiKod 
 " URL     : https://github.com/AndiKod/racoon 
 " :help   : https://vimhelp.org
@@ -154,11 +154,11 @@ nnoremap <Leader>ev :e $MYVIMRC <CR>
 nnoremap <F12> :so $MYVIMRC<CR>
 
 " Edit my WezTerm config file 
-nnoremap <leader>et :e /mnt/c/Users/Megaport/.wezterm.lua <cr>
+" nnoremap <leader>et :e /path/to/.wezterm.lua <CR>
 
 " CtrS from both modes and back to Normal
-nnoremap <C-s> :w <CR> :Prettier <cr>
-inoremap <C-s> <Esc> :w <CR> :Prettier <cr>
+nnoremap <C-s> :w <CR> :Prettier <CR>
+inoremap <C-s> <Esc> :w <CR> :Prettier <CR>
 
 
 " Navigate the splits
@@ -192,8 +192,8 @@ autocmd InsertEnter,WinLeave * set nocursorline
 " &:BuffTabline
 
 set hidden
-nnoremap <tab> :bnext<CR>
-nnoremap <s><tab> :bprev<CR>
+nnoremap <Tab> :bnext<CR>
+nnoremap <s><Tab> :bprev<CR>
 
 " --------------------------------------------/
 
@@ -281,7 +281,7 @@ let g:startify_files_number = 5
 let g:startify_relative_path = 1
 
 let g:startify_bookmarks = [
-  \ { 'v': '~/.vimrc' },
+  \ { 'v': '$MYVIMRC' },
   \ { 'b': '~/.bashrc' },
   \ ]
 

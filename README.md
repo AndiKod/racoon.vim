@@ -11,7 +11,7 @@
 
 Joe the Rac@@n is not trying to stuff everything under the sun in your vimrc, but just some essential starting tools and bindings for a head start. This, plus some ressources to let you make it your own place, while still being "code editing" ready out of the box.
 
-This is maninly a personal config i'm gradually testing, but glad to share if it could help people into "Joining the green side of the VimForce".
+This is maninly a personal config i'm gradually testing, but glad to share if it could help people into "Joining the green side of the VimForce". I'll try to document the journey.
 
 Goals for a minimal (and pleasant) editor, mostly WebDev:
 
@@ -87,9 +87,9 @@ Here are the included, self installing plugings:
 - _[BuffTabline](https://github.com/ap/vim-buftabline)_ : visual tabs for opened buffers
 - _[Vim-Airline]](https://github.com/vim-airline/vim-airline)_ : versatile status bar
 - _[FzF](https://github.com/junegunn/fzf.vim)_ : fuzzy finder multi-purpose search
-- _[NerdTree](https://github.com/preservim/nerdtree)_ : files explorer 
+- _[NerdTree](https://github.com/preservim/nerdtree)_ : files explorer
 - _[DevIcons](https://github.com/ryanoasis/vim-devicons)_ : Need a NerdFont
-- _[Files CRUD](https://github.com/PhilRunninger/nerdtree-visual-selection)_ : Files operations from inside NerdTree 
+- _[Files CRUD](https://github.com/PhilRunninger/nerdtree-visual-selection)_ : Files operations from inside NerdTree
 - _[Startify](https://github.com/mhinz/vim-startify/blob/master/doc/startify.txt)_ : custom[isable] starting page
 - _[CocNvim](https://github.com/neoclide/coc.nvim)_ : all you need for LSP & co, via [extensions](https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions)
 - _[Comentary](https://github.com/tpope/vim-commentary)_ : easy comments with `<gcc>`
@@ -124,9 +124,11 @@ Here are some simple daily commands, among others:
 | ---          |                 Some more ...                 |
 | `>` or `<`   |    Indent the line, and keep the selection    |
 | `gcc`        |        Toggle comments [vim-Comentary]        |
-| `<leader>ev` |     Edit .vimrc `<c-s>` save `:so` source     |
-| `<leader>fg` |             Find git files [FzF]              |
+| `<leader>ev` |     Edit .vimrc or .vim/vimrc as $MYVIMRC     |
+| `<F12>`      |   Source the $MYVIMRC file to apply changes   |
 | `<leader>fh` |       Search within the :History [FzF]        |
+| `<Esc>`      |      Will remove the highlighted search       |
+| `<leader>cx` |       List the installed coc-extensions       |
 
 To see the rest or add yours, head to the vimrc ;) and plugins/extentions docs.
 
