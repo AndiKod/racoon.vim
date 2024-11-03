@@ -13,7 +13,6 @@
 " ------------------------------------------------- //
 " Version : 1.0.0
 " Licence : GPL (Do whatever, but keep it FOSS)
-" Author  : Andrei Curelaru aka AndiKod 
 " URL     : https://github.com/AndiKod/racoon 
 " :help   : https://vimhelp.org
 "-------------------------------------------------- //

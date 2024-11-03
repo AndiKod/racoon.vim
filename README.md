@@ -32,9 +32,9 @@ Goals for a minimal (and pleasant) editor, mostly WebDev:
 
 ## One file, hands-free simple Install
 
-- 1. Backup/Rename existing .vimrc and .vim file/folder
-- 2. Copy the `vimrc` file inside `~/.vim` folder
-- 3. Open Vim
+1. Backup/Rename existing .vimrc and things inside .vim folder
+2. Copy the `vimrc` file inside `~/.vim` folder
+3. Open Vim
 
 VimPlug will install itself, then procede to install the main plugins including CoC-Nvim, then CoC will install a first round of extensions/tools/lsp, as mentioned in the vimrc:
 
@@ -85,7 +85,7 @@ Here are the included, self installing plugings:
 
 - _[Catppuccin](https://github.com/catppuccin/vim)_ : delicious colorschemes
 - _[BuffTabline](https://github.com/ap/vim-buftabline)_ : visual tabs for opened buffers
-- _[Vim-Airline]](https://github.com/vim-airline/vim-airline)_ : versatile status bar
+- _[Vim-Airline](https://github.com/vim-airline/vim-airline)_ : versatile status bar
 - _[FzF](https://github.com/junegunn/fzf.vim)_ : fuzzy finder multi-purpose search
 - _[NerdTree](https://github.com/preservim/nerdtree)_ : files explorer
 - _[DevIcons](https://github.com/ryanoasis/vim-devicons)_ : Need a NerdFont
@@ -148,7 +148,7 @@ e.g: To create "./src/pages/about.md" place the cursor inside NerdTree, press `m
 
 ### Jump to specific files & more
 
-- `<leader>ff` [F]ind[F]iles with [FzF](https://github.com/junegunn/fzf.vim) FuzzyFinder inside the current project folder. FzF does a lot of other intersting things. Check the vimrc and their docs. Add your own preferred bindings.
+`<leader>ff` [F]ind[F]iles with [FzF](https://github.com/junegunn/fzf.vim) FuzzyFinder inside the current project folder, but also way more! Check the vimrc and their docs. Add your own preferred bindings, as I had just scrathed the surface.
 
 #### Visualize opened buffers & cycle
 
