@@ -1,22 +1,20 @@
-                        ,,,
-                     .'    `/\_/\
-                   .'       <@I@>
-        <((((((((((  )____(  \./
-                   \( \(   \(\(
-                    `-"`-"  " "
+                    ,,,
+                 .'    `/\_/\
+               .'       <@I@>
+    <((((((((((  )____(  \./
+               \( \(   \(\(
+                `-"`-"  " "
 
-        Your new coding pet ^^
+    Your new coding pet ^^
 
-# Rac@@n. Small, playful and fun Vim setup
+# Rac@@n.Vim, playful little VimStarter
 
-Joe the Rac@@n is not trying to stuff everything under the sun in your vimrc, but just some essential starting tools and bindings for a head start. This, plus some ressources to let you make it your own place, while still being "code editing" ready out of the box.
+This vimrc file will auto-configure Vim with defaults features we would expect when edditing code. Out of the box is intended for WebDev, but easy to be customised into whatever the needs.
 
-This is maninly a personal config i'm gradually testing, but glad to share if it could help people into "Joining the green side of the VimForce". I'll try to document the journey.
-
-Goals for a minimal (and pleasant) editor, mostly WebDev:
+Goals for a minimal-and pleasant-editor:
 
 - Ease of installation
-- Handful of logical keybinds
+- Handful of meaningful keybinds
 - Simple plugins management
 - Browse/Manage local files
 - Jump to specific files & more
@@ -34,13 +32,13 @@ Goals for a minimal (and pleasant) editor, mostly WebDev:
 
 1. Backup/Rename existing .vimrc and things inside .vim folder
 2. Copy the `vimrc` file inside `~/.vim` folder
-3. Open Vim
+3. Open Vim.
 
-VimPlug will install itself, then procede to install the main plugins including CoC-Nvim, then CoC will install a first round of extensions/tools/lsp, as mentioned in the vimrc:
+VimPlug will install itself inside `.vim/autoload`, then procede to install the main plugins in `.vim/plugged` including coc.nvim, then CoC will install a first round of extensions/tools/lsp:
 
 ```vim
 " Auto install first extentions
-let g:coc_global_extensions = [ 'coc-vimlsp', 'coc-tabnine', 'coc-snippets', 'coc-prettier', 'coc-pairs', 'coc-html', 'coc-eslint', 'coc-emmet', 'coc-vetur', 'coc-unocss', 'coc-tsserver', 'coc-json', 'coc-css', '@yaegassy/coc-tailwindcss3' ]
+let g:coc_global_extensions = [ 'coc-vimlsp', 'coc-tabnine', 'coc-snippets', 'coc-prettier', 'coc-pairs', 'coc-html', 'coc-eslint', 'coc-emmet', 'coc-tsserver', 'coc-json', 'coc-css', '@yaegassy/coc-tailwindcss3' ]
 ```
 
 You're ready to roll with snippets, auto completion, auto formating, AI assistant, live checking for errors, ...as a starting point. Play around, make it your own Rac@@n.
@@ -74,12 +72,12 @@ Managing plugins with [VimPlug](http://vimplug.com) is as simple as that:
 call plug#begin()
 
 " List your plugins here
-Plug 'tpope/vim-comentary'
+Plug 'tpope/vim-commentary'
 
 call plug#end()
 ```
 
-From here, `:Plug` commands will help managing plugings, with commands such as _:PlugInstall_, _:PlugUpdate_, _:PlugClean_, & so on.
+`:Plug` commands will help managing plugings, with commands such as _:PlugInstall_, _:PlugUpdate_, _:PlugClean_, & so on.
 
 Here are the included, self installing plugings:
 
@@ -96,6 +94,7 @@ Here are the included, self installing plugings:
 - _[Fugitive](https://github.com/tpope/vim-fugitive)_ : bringing `:Git` commands inside Vim
 - _[Surround](https://github.com/tpope/vim-surround)_ : amazing tool to get around things
 - _[CSS Colors](https://github.com/ap/vim-css-colors)_ : colors preview inside css files
+- _[Vim-Transparent](https://github.com/tribela/vim-transparent)_ : making themes background transparent
 
 For things specific to a language or more, I let [Conquer of Completion](https://github.com/neoclide/coq.nvim) doing the heavy lifting, while keeping the config simple and clean. Commands starting with `:Coc` will do a lot, with installing functionalities, using custom commands and acessing the general `:CocConfig` file.
 
@@ -116,6 +115,7 @@ Here are some simple daily commands, among others:
 | `jj`         |         The other `<Esc>` or `<C-c>`          |
 | `<C-s>`      |       Save the current buffer & Format        |
 | `<leader>e`  |     Toggle the files Explorer [NerdTree]      |
+| `m`          |    Open the files manager inside NerdTree     |
 | `<leader>ff` |      Find files inside the project [FzF]      |
 | `<leader>sc` |      Search lines in the Current buffer       |
 | `<c-l>`      |    Navigate splits. (or any of h,j,k or l)    |
@@ -136,9 +136,9 @@ Obviously there are more of them ^^ and you can add yours.
 
 ---
 
-#### Classic Parts
+#### :Verbose
 
-Some basic needs and daily bread, when it comes to editing code.
+You already know the esential parts, yet, here's some more :)
 
 ### Manage local files from within NERDTree
 
@@ -174,17 +174,15 @@ Say you want to add a custom snippet for .md files. From an actual markdown file
 
 ### Easy to run parallel shell
 
-For little things, the Vim way would be enough. You can use `:! my shell command`, or put the editor to sleep with `<C-z>`, do your thing, and when done hit `<fg>` and bring back Vim to the ForeGround.
+On a personnal level, [WezTerm](https://wezfurlong.org/wezterm/index.html) is the recomanded terminal, with [this setup](https://github.com/dragonlobster/wezterm-config/blob/main/wezterm.lua) via a simple lua file, making it beautiful and Tmux-like without complications. [Short video demo](https://www.youtube.com/watch?v=V1X4WQTaxrc)
 
-Nevertheless, [WezTerm](https://wezfurlong.org/wezterm/index.html) is the recomanded terminal, with [this setup](https://github.com/dragonlobster/wezterm-config/blob/main/wezterm.lua) via a simple lua file, making it beautiful and Tmux-like without complications. [Short video demo](https://www.youtube.com/watch?v=V1X4WQTaxrc)
-
-[Tmux](https://www.youtube.com/watch?v=U41BTVZLKB0) can also be an option. Saving running setups of terminal sessions with running dev servers without having to restart, yet, when I tried it he messed up the colorscheme.
+[Tmux](https://www.youtube.com/watch?v=U41BTVZLKB0) can also be an option.
 
 #### Great looking theme:
 
-Nobody needs 85 random colorschemes "out of the box", whatever the level of ChadNess. Rac@@n comes with the excellent Catppuccin flavors. If you have a favorite like a virtual MyWunderbarColors. Add it's repo in the .vimrc / run :PlugUpdate / update colorscheme=MyWunderbarColors ...and enjoy feeling at home.
+Nobody needs 85 random colorschemes "out of the box", whatever the level of ChadNess. Rac@@n comes with the excellent Catppuccin flavors.
 
-To test out existing colorsschemes, use the `:Colors` command and cycle trough them for a preview.
+To test out existing colorsschemes, use the `:Colors` command and cycle trough them for a preview. You can for sure install your favorite colorsheme plugin you like.
 
 #### Extendable to fit new needs
 

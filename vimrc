@@ -1,21 +1,16 @@
-" ------------------------------------------------- //
+                          
 "                          ,,,
-"                       .'    `/\_/\
+"  Rac@@n.Vim           .'    `/\_/\
 "                     .'       <@I@>
 "          <((((((((((  )____(  \./
 "                     \( \(   \(\(
 "                      `-"`-"  " "
-"   _ __ __ _  ___ ___   ___  _ __  
-"  | '__/ _` |/ __/ _ \ / _ \| '_ \ 
-"  | | | (_| | (_| (_) | (_) | | | |
-"  |_|  \__,_|\___\___/ \___/|_| |_|
-"  - Playful little Vim for WebDev -
-" ------------------------------------------------- //
-" Version : 1.0.0
-" Licence : GPL (Do whatever, but keep it FOSS)
+"  - Playful little VimStarter for WebDev
+
+" ------------------------------------------------- 
 " URL     : https://github.com/AndiKod/racoon 
 " :help   : https://vimhelp.org
-"-------------------------------------------------- //
+"-------------------------------------------------- 
 
 " <za> on {{{ folds }}} will toggle them ;)
 
@@ -45,6 +40,8 @@ call plug#begin()
   Plug 'ap/vim-css-color'
   Plug 'catppuccin/vim', { 'as': 'catppuccin'  }
   Plug 'mhinz/vim-startify'
+  Plug 'chriszarate/yazi.vim'
+  Plug 'tribela/vim-transparent'
 call plug#end()
 
 " Plugins configs are below, with the Mappings
@@ -112,6 +109,7 @@ set scrolloff     =4
 set ignorecase
 set smartcase
 set tagcase       =match 
+               
 " ::vrac settings (aka misc)
 set clipboard     =unnamed  " clipboard yanks?
 set hidden                  " Switch buffer without saving  
@@ -153,19 +151,17 @@ nnoremap <Leader>ev :e $MYVIMRC <CR>
 nnoremap <F12> :so $MYVIMRC<CR>
 
 " Edit my WezTerm config file 
-" nnoremap <leader>et :e /path/to/.wezterm.lua <CR>
+nnoremap <leader>et :e /mnt/c/Users/Megaport/.wezterm.lua <cr> 
 
 " CtrS from both modes and back to Normal
-nnoremap <C-s> :w <CR> :Prettier <CR>
-inoremap <C-s> <Esc> :w <CR> :Prettier <CR>
-
+nnoremap <C-s> :w <CR> :Prettier <cr>
+inoremap <C-s> <Esc> :w <CR> :Prettier <cr>
 
 " Navigate the splits
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
-
 
 " Remove highlight
 nnoremap <Esc> :nohl<CR>
@@ -174,15 +170,11 @@ nnoremap <Esc> :nohl<CR>
 xnoremap <  <gv
 xnoremap >  >gv
 
-
 " --- &:Autocomands ---
 
 " Line highlight, only in Normal mode
 autocmd InsertLeave,WinEnter * set cursorline
 autocmd InsertEnter,WinLeave * set nocursorline
-
-
-
 
 " ------------------------------/
 "  Plugings specific Settings   /
@@ -191,13 +183,12 @@ autocmd InsertEnter,WinLeave * set nocursorline
 " &:BuffTabline
 
 set hidden
-nnoremap <Tab> :bnext<CR>
-nnoremap <s><Tab> :bprev<CR>
+nnoremap <tab> :bnext<CR>
+nnoremap <s><tab> :bprev<CR>
 
-" --------------------------------------------/
+" --------------------------------------------
 
 " &:FzF
-
 " :Files {directory} to search outside
 
 " Find Files (inside the project)
@@ -251,7 +242,6 @@ let g:airline_theme = 'catppuccin_mocha'
 " --------------------------------------------
 
 " &:Startify
-
 " https://github.com/mhinz/vim-startify/blob/master/doc/startify.txt
 
 let g:ascii = [
@@ -261,8 +251,8 @@ let g:ascii = [
       \'  <((((((((((  )____(  \./  ',
       \'             \( \(   \(\(   ',
       \'              `-"`-"  " "   ',
-      \ '       Rac@@n say ...',  
-      \]
+\ '       Rac@@n say ...',  
+\]
 let g:asciiFooter = [
       \' Howdy mate, Rac@@n docs are on github.com/AndiKod/racoon ',
       \]
@@ -297,8 +287,9 @@ let g:startify_lists = [
 " pand by <Tab> C-n or C-p for next/previous 
 inoremap <silent><expr> <tab> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
-" Auto install first extentions
-let g:coc_global_extensions = [ 'coc-vimlsp', 'coc-tabnine', 'coc-snippets', 'coc-prettier', 'coc-pairs', 'coc-html', 'coc-eslint', 'coc-emmet', 'coc-vetur', 'coc-unocss', 'coc-tsserver', 'coc-json', 'coc-css', '@yaegassy/coc-tailwindcss3' ]
+" Auto install basic extentions
+let g:coc_global_extensions = [ 'coc-vimlsp', 'coc-tabnine', 'coc-snippets', 'coc-prettier', 'coc-pairs', 'coc-html', 'coc-eslint', 'coc-emmet', 'coc-tsserver', 'coc-json', 'coc-css', '@yaegassy/coc-tailwindcss3' ]
+" You can add or :CocInstall more to add support for Astro, Svelte, PHP ...
 
 
 " Use `[g` and `]g` to navigate diagnostics
