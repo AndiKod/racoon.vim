@@ -9,7 +9,7 @@
 
 # Rac@@n.Vim, playful little VimStarter
 
-This vimrc file will auto-configure Vim with defaults features we would expect when edditing code. Out of the box is intended for WebDev, but easy to be customised into whatever the needs.
+This vimrc file will auto-configure Vim with defaults features we would expect when editing code. Out of the box is intended for WebDev, but easy to be customised into whatever the needs.
 
 Goals for a minimal-and pleasant-editor:
 
