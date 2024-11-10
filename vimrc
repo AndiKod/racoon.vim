@@ -150,9 +150,6 @@ nnoremap <Leader>ev :e $MYVIMRC <CR>
 " Source .vimrc
 nnoremap <F12> :so $MYVIMRC<CR>
 
-" Edit my WezTerm config file 
-nnoremap <leader>et :e /mnt/c/Users/Megaport/.wezterm.lua <cr> 
-
 " CtrS from both modes and back to Normal
 nnoremap <C-s> :w <CR> :Prettier <cr>
 inoremap <C-s> <Esc> :w <CR> :Prettier <cr>
