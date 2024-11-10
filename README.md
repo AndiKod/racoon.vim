@@ -9,9 +9,12 @@
 
 # Rac@@n.Vim, playful little VimStarter
 
-This vimrc file will auto-configure Vim with defaults features we would expect when editing code. Out of the box is intended for WebDev, but easy to be customised into whatever the needs.
+![RacoonVim](https://github.com/user-attachments/assets/4d787fd5-c91d-418b-9a15-49dfaf0220e0)
 
-Goals for a minimal-and pleasant-editor:
+
+This minimal vimrc file will auto-configure Vim with defaults features we would expect when editing code. Out of the box is intended for WebDev, and it's minimal on purpose as it's just a starting point. Make your own Rac@@n pet.
+
+Some goals for a WebDev kickstart:
 
 - Ease of installation
 - Handful of meaningful keybinds
@@ -146,26 +149,6 @@ Once inside the NerdTree pane, pressing `m` will open a second menu assisting wi
 
 e.g: To create "./src/pages/about.md" place the cursor inside NerdTree, press `m` to "modify" something then `a` to "add" a file or/and folder. At the bottom of the screen you will see the prompt where you can write the full path from where you are. The intermediate folders will be created if non-existant.
 
-### Jump to specific files & more
-
-`<leader>ff` [F]ind[F]iles with [FzF](https://github.com/junegunn/fzf.vim) FuzzyFinder inside the current project folder, but also way more! Check the vimrc and their docs. Add your own preferred bindings, as I had just scrathed the surface.
-
-#### Visualize opened buffers & cycle
-
-The [vim-buftabline](https://github.com/ap/vim-buftabline) pluging does just that. Opened buffers will be visually listed at the top of the screen as tabs-like labels. In normal mode, the `<tab>` key will display/activate the next one _(shift+tab the previous)_ and the custom bind `<leader>x` will close the active buffer.
-
-#### Highlight webDev files + bonus
-
-Syntax highlight, auto-complete suggestions or documentation on hover will come from whatever is installed via specific coc-extensions or regular plugins. Most of time out of the box options are good enough.
-
-#### Format on save with Prettier
-
-The html, css, js/ts, formating is bound to `<C-s>`. It will format and save the file. At any other moment, the `:Prettier` custom command is available to do it 'on the fly'. See [coc-prettier](https://github.com/neoclide/coc-prettier)
-
-#### Live lint/hint ts, css, ...
-
-Just try some weird things, and TSServer or other might complain, with hints on what's wrong. In other contexts, hovering elements will give infos, plus the classic "gd for GoToDefinition" etc.
-
 #### Autocompletion and Snippets
 
 Comming from [coc-snippets](https://github.com/neoclide/coc-snippets), other coc-extensions and plugins, quite some snippets are actives and `<tab>` will expand them, while `<c-p>` or `<c-n>` will move on the previous or next suggestion.
@@ -176,7 +159,7 @@ Say you want to add a custom snippet for .md files. From an actual markdown file
 
 On a personnal level, [WezTerm](https://wezfurlong.org/wezterm/index.html) is the recomanded terminal, with [this setup](https://github.com/dragonlobster/wezterm-config/blob/main/wezterm.lua) via a simple lua file, making it beautiful and Tmux-like without complications. [Short video demo](https://www.youtube.com/watch?v=V1X4WQTaxrc)
 
-[Tmux](https://www.youtube.com/watch?v=U41BTVZLKB0) can also be an option.
+[Tmux](https://www.youtube.com/watch?v=U41BTVZLKB0) can also be an option, witch don't exclude Wez. Both work great together.
 
 #### Great looking theme:
 
