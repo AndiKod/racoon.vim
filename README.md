@@ -9,7 +9,9 @@
 
 # Rac@@n.Vim, playful little VimStarter
 
-This minimal vimrc file will auto-configure Vim with defaults features we would expect when editing code. Out of the box is intended for WebDev, and it's minimal on purpose as it's just a starting point. Make your own Rac@@n pet.
+[![Racoon-Vim.png](https://i.postimg.cc/43QxHm17/Racoon-Vim.png)](https://postimg.cc/zL3r9D68)
+
+This minimal vimrc file will auto-configure Vim with some useful defaults. Out of the box is intended for WebDev, and it's minimal on purpose as it's just a starting point. Make your own Rac@@n pet.
 
 Some goals for a WebDev kickstart:
 
@@ -126,7 +128,7 @@ Here are some simple daily commands, among others:
 | `R`          |       Rename something under the cursor       |
 | `D`          |             Delete what you want              |
 | `-`          |                Go up one Dir/                 |
-| `<tab>`          |                Exit Netrw                  |
+| `<tab>`      |                  Exit Netrw                   |
 | `<leader>t`  |       Open an internal teminal [:term]        |
 | `exit`       |      ...inside the terminal to close it       |
 | ---          |                 Some more ...                 |
