@@ -9,9 +9,6 @@
 
 # Rac@@n.Vim, playful little VimStarter
 
-![RacoonVim](https://github.com/user-attachments/assets/4d787fd5-c91d-418b-9a15-49dfaf0220e0)
-
-
 This minimal vimrc file will auto-configure Vim with defaults features we would expect when editing code. Out of the box is intended for WebDev, and it's minimal on purpose as it's just a starting point. Make your own Rac@@n pet.
 
 Some goals for a WebDev kickstart:
@@ -117,14 +114,24 @@ Here are some simple daily commands, among others:
 | ------------ | :-------------------------------------------: |
 | `jj`         |         The other `<Esc>` or `<C-c>`          |
 | `<C-s>`      |       Save the current buffer & Format        |
-| `<leader>e`  |     Toggle the files Explorer [NerdTree]      |
-| `m`          |    Open the files manager inside NerdTree     |
 | `<leader>ff` |      Find files inside the project [FzF]      |
 | `<leader>sc` |      Search lines in the Current buffer       |
-| `<c-l>`      |    Navigate splits. (or any of h,j,k or l)    |
+| `<c-h>`      |       Navigate splits with C+h or j/k/l       |
 | `<tab>`      | Go to next opened buffer. Expand/Autocomplete |
 | `<leader>x`  |       Close (delete) the current buffer       |
+| `<leader>s`  |      Open the Startify screen if needed       |
+| `<leader>n`  |      Open a minimal Netrw, then inside:       |
+| `%`          |               Create a new file               |
+| `d`          |            Create a new directory             |
+| `R`          |       Rename something under the cursor       |
+| `D`          |             Delete what you want              |
+| `-`          |                Go up one Dir/                 |
+| `<tab>`          |                Exit Netrw                  |
+| `<leader>t`  |       Open an internal teminal [:term]        |
+| `exit`       |      ...inside the terminal to close it       |
 | ---          |                 Some more ...                 |
+| `<leader>e`  |     Toggle NerdTree (Optional. See Netrw)     |
+| `m`          |    Open the files manager inside NerdTree     |
 | `>` or `<`   |    Indent the line, and keep the selection    |
 | `gcc`        |        Toggle comments [vim-Comentary]        |
 | `<leader>ev` |     Edit .vimrc or .vim/vimrc as $MYVIMRC     |

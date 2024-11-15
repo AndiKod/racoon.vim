@@ -8,7 +8,7 @@
 "  - Playful little VimStarter for WebDev
 
 " ------------------------------------------------- 
-" URL     : https://github.com/AndiKod/racoon 
+" URL     : https://github.com/AndiKod/racoon.vim 
 " :help   : https://vimhelp.org
 "-------------------------------------------------- 
 
@@ -150,6 +150,21 @@ nnoremap <Leader>ev :e $MYVIMRC <CR>
 " Source .vimrc
 nnoremap <F12> :so $MYVIMRC<CR>
 
+
+" Netrw Files Browser
+nnoremap <leader>n :E<cr>
+augroup VimStartup
+au!
+au VimEnter * if expand("%") == "" | e . | endif
+augroup END
+let g:netrw_banner=0
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+,\(^\|\s\s\)ntuser\.\S\+'
+autocmd FileType netrw set nolist
+
+" Local terminal to run things 
+nnoremap <leader>t :term<CR>
+
+
 " CtrS from both modes and back to Normal
 nnoremap <C-s> :w <CR> :Prettier <cr>
 inoremap <C-s> <Esc> :w <CR> :Prettier <cr>
@@ -240,6 +255,11 @@ let g:airline_theme = 'catppuccin_mocha'
 
 " &:Startify
 " https://github.com/mhinz/vim-startify/blob/master/doc/startify.txt
+
+
+" Closed on startup
+let g:startify_disable_at_vimenter = 1
+nnoremap <leader>s :Startify<CR>
 
 let g:ascii = [
       \'', 
