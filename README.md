@@ -11,7 +11,7 @@
 
 [![Racoon-Vim.png](https://i.postimg.cc/43QxHm17/Racoon-Vim.png)](https://postimg.cc/zL3r9D68)
 
-This minimal vimrc file will auto-configure Vim with some useful defaults. Out of the box is intended for WebDev, and it's minimal on purpose as it's just a starting point. Make your own Rac@@n pet.
+This minimal vimrc file will auto-configure Vim with some useful defaults for WebDev _(but not only)_, and it's minimal on purpose as it's just a starting point. Make your own Rac@@n pet. It's just Vim.
 
 Some goals for a WebDev kickstart:
 
@@ -33,17 +33,18 @@ Some goals for a WebDev kickstart:
 ## One file, hands-free simple Install
 
 1. Backup/Rename existing .vimrc and things inside .vim folder
-2. Copy the `vimrc` file inside `~/.vim` folder
-3. Open Vim.
+   You can either have `~/.vimrc` OR `~/.vim/vimrc`
+2. Copy the `vimrc` file inside `~/.vim` folder (to keep is simple)
+3. Open Vim :)
 
-VimPlug will install itself inside `.vim/autoload`, then procede to install the main plugins in `.vim/plugged` including coc.nvim, then CoC will install a first round of extensions/tools/lsp:
+VimPlug will install itself inside `.vim/autoload`, then procede to install the main plugins in `.vim/plugged` including coc.nvim, then CocNvim will install a first round of extensions/tools/lsp:
 
 ```vim
 " Auto install first extentions
 let g:coc_global_extensions = [ 'coc-vimlsp', 'coc-tabnine', 'coc-snippets', 'coc-prettier', 'coc-pairs', 'coc-html', 'coc-eslint', 'coc-emmet', 'coc-tsserver', 'coc-json', 'coc-css', '@yaegassy/coc-tailwindcss3' ]
 ```
 
-You're ready to roll with snippets, auto completion, auto formating, AI assistant, live checking for errors, ...as a starting point. Play around, make it your own Rac@@n.
+You're ready to roll with snippets, auto completion, auto formating, AI assistant, live checking for errors, ...as a starting point. It's just a beginning.
 
 The installed plugins and config files are in `~/.vim` and `~/.config/coc/`.
 
@@ -83,20 +84,20 @@ call plug#end()
 
 Here are the included, self installing plugings:
 
-- _[Catppuccin](https://github.com/catppuccin/vim)_ : delicious colorschemes
+- -- Core:
+- _[CocNvim](https://github.com/neoclide/coc.nvim)_ : all you need for LSP & co, via [extensions](https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions)
 - _[BuffTabline](https://github.com/ap/vim-buftabline)_ : visual tabs for opened buffers
 - _[Vim-Airline](https://github.com/vim-airline/vim-airline)_ : versatile status bar
 - _[FzF](https://github.com/junegunn/fzf.vim)_ : fuzzy finder multi-purpose search
-- _[NerdTree](https://github.com/preservim/nerdtree)_ : files explorer
-- _[DevIcons](https://github.com/ryanoasis/vim-devicons)_ : Need a NerdFont
-- _[Files CRUD](https://github.com/PhilRunninger/nerdtree-visual-selection)_ : Files operations from inside NerdTree
-- _[Startify](https://github.com/mhinz/vim-startify/blob/master/doc/startify.txt)_ : custom[isable] starting page
-- _[CocNvim](https://github.com/neoclide/coc.nvim)_ : all you need for LSP & co, via [extensions](https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions)
+- -- Plus:
+- _[Catppuccin](https://github.com/catppuccin/vim)_ : delicious colorschemes, or replace with your fav'
 - _[Comentary](https://github.com/tpope/vim-commentary)_ : easy comments with `<gcc>`
-- _[Fugitive](https://github.com/tpope/vim-fugitive)_ : bringing `:Git` commands inside Vim
+- _[Fugitive](https://github.com/tpope/vim-fugitive)_ : `:Git` inside Vim, or get Oh-My-Bash with Git plugin
 - _[Surround](https://github.com/tpope/vim-surround)_ : amazing tool to get around things
 - _[CSS Colors](https://github.com/ap/vim-css-colors)_ : colors preview inside css files
+- -- Optional:
 - _[Vim-Transparent](https://github.com/tribela/vim-transparent)_ : making themes background transparent
+- _[Startify](https://github.com/mhinz/vim-startify/blob/master/doc/startify.txt)_ : custom[isable] starting page
 
 For things specific to a language or more, I let [Conquer of Completion](https://github.com/neoclide/coq.nvim) doing the heavy lifting, while keeping the config simple and clean. Commands starting with `:Coc` will do a lot, with installing functionalities, using custom commands and acessing the general `:CocConfig` file.
 
@@ -108,43 +109,41 @@ Most of times, the defaults are good enough out of the box. The eventual customi
 
 Here are some simple daily commands, among others:
 
-`<Esc>` : Escape
-`<C-s>` : Control + `s`
-`<Leader>e` : The leader key (space in Rac@@n) + `e`
+`<Esc>` : Escape <br/>
+`<C-s>` : Control + `s` <br/>
+`<Leader>e` : The leader key (space in Rac@@n) + `e` <br/>
 
-| Binding      |                    Action                     |
-| ------------ | :-------------------------------------------: |
-| `jj`         |         The other `<Esc>` or `<C-c>`          |
-| `<C-s>`      |       Save the current buffer & Format        |
-| `<leader>ff` |      Find files inside the project [FzF]      |
-| `<leader>sc` |      Search lines in the Current buffer       |
-| `<c-h>`      |       Navigate splits with C+h or j/k/l       |
-| `<tab>`      | Go to next opened buffer. Expand/Autocomplete |
-| `<leader>x`  |       Close (delete) the current buffer       |
-| `<leader>s`  |      Open the Startify screen if needed       |
-| `<leader>n`  |      Open a minimal Netrw, then inside:       |
-| `%`          |               Create a new file               |
-| `d`          |            Create a new directory             |
-| `R`          |       Rename something under the cursor       |
-| `D`          |             Delete what you want              |
-| `-`          |                Go up one Dir/                 |
-| `<tab>`      |                  Exit Netrw                   |
-| `<leader>t`  |       Open an internal teminal [:term]        |
-| `exit`       |      ...inside the terminal to close it       |
-| ---          |                 Some more ...                 |
-| `<leader>e`  |     Toggle NerdTree (Optional. See Netrw)     |
-| `m`          |    Open the files manager inside NerdTree     |
-| `>` or `<`   |    Indent the line, and keep the selection    |
-| `gcc`        |        Toggle comments [vim-Comentary]        |
-| `<leader>ev` |     Edit .vimrc or .vim/vimrc as $MYVIMRC     |
-| `<F12>`      |   Source the $MYVIMRC file to apply changes   |
-| `<leader>fh` |       Search within the :History [FzF]        |
-| `<Esc>`      |      Will remove the highlighted search       |
-| `<leader>cx` |       List the installed coc-extensions       |
+| Binding      |                  Action                   |
+| ------------ | :---------------------------------------: |
+| `jj`         |       The other `<Esc>` or `<C-c>`        |
+| `<C-s>`      |     Save the current buffer & Format      |
+| `<leader>ff` |    Find files inside the project [FzF]    |
+| `<leader>sc` |    Search in the Current buffer [FzF]     |
+| `<leader>n`  |    Open a minimal Netrw, then inside:     |
+| `%`          |             Create a new file             |
+| `d`          |          Create a new directory           |
+| `R`          |     Rename something under the cursor     |
+| `D`          |           Delete what you want            |
+| `-`          |              Go up one Dir/               |
+| `<tab>`      |                Exit Netrw                 |
+| `<C-h>`      |     Navigate splits with C+h or j/k/l     |
+| `<Tab>`      |  Go to next buffer. Expand/Autocomplete   |
+| `<S-Tab>`    |  Go to the previous buffer in the list.   |
+| `<leader>b`  |       Show the opened buffers list        |
+| `<leader>x`  |     Close (delete) the current buffer     |
+| `<leader>t`  |     Open an internal teminal [:term]      |
+| `<leader>tv` |        Open a terminal, Vertically        |
+| `exit`       |    ...inside the terminal to close it     |
+| ---          |               Some more ...               |
+| `>` or `<`   |  Indent the line, and keep the selection  |
+| `gcc`        |      Toggle comments [vim-Comentary]      |
+| `<leader>ev` |   Edit .vimrc or .vim/vimrc as $MYVIMRC   |
+| `<leader>sv` | Source the $MYVIMRC file to apply changes |
+| `<Esc>`      |    Will remove the highlighted search     |
+| `<leader>cx` |     List the installed coc-extensions     |
+| `<leader>s`  |    Open the Startify screen if needed     |
 
 To see the rest or add yours, head to the vimrc ;) and plugins/extentions docs.
-
-Obviously there are more of them ^^ and you can add yours.
 
 ---
 
@@ -152,11 +151,17 @@ Obviously there are more of them ^^ and you can add yours.
 
 You already know the esential parts, yet, here's some more :)
 
-### Manage local files from within NERDTree
+### Some words about NERDTree & co
 
-Once inside the NerdTree pane, pressing `m` will open a second menu assisting with Create / Rename / Move / Delete files. Follow the menu instructions.
+Not an absolute necessity, but if you so wish add those plugins:
 
-e.g: To create "./src/pages/about.md" place the cursor inside NerdTree, press `m` to "modify" something then `a` to "add" a file or/and folder. At the bottom of the screen you will see the prompt where you can write the full path from where you are. The intermediate folders will be created if non-existant.
+- _[NerdTree](https://github.com/preservim/nerdtree)_ : files explorer
+- _[DevIcons](https://github.com/ryanoasis/vim-devicons)_ : Need a NerdFont
+- _[Files CRUD](https://github.com/PhilRunninger/nerdtree-visual-selection)_ : Files operations from inside NerdTree
+
+And a keybind mapped to `:NERDTreeToggle`. From within the sidebar, `m` will open the files operations menu.
+
+Yet, a really powerful alternative, when it comes to visually managing files, is to get something like [Yazi](https://github.com/sxyazi/yazi/releases) with that single [plugin](https://github.com/chriszarate/yazi.vim) on top of it.
 
 #### Autocompletion and Snippets
 
@@ -166,15 +171,9 @@ Say you want to add a custom snippet for .md files. From an actual markdown file
 
 ### Easy to run parallel shell
 
-On a personnal level, [WezTerm](https://wezfurlong.org/wezterm/index.html) is the recomanded terminal, with [this setup](https://github.com/dragonlobster/wezterm-config/blob/main/wezterm.lua) via a simple lua file, making it beautiful and Tmux-like without complications. [Short video demo](https://www.youtube.com/watch?v=V1X4WQTaxrc)
+On a personnal level, I really like [WezTerm](https://wezfurlong.org/wezterm/index.html), with [this setup](https://github.com/dragonlobster/wezterm-config/blob/main/wezterm.lua) via a simple lua file, making it beautiful and Tmux-like without complications. [Short video demo](https://www.youtube.com/watch?v=V1X4WQTaxrc), not mine, thx to the author.
 
 [Tmux](https://www.youtube.com/watch?v=U41BTVZLKB0) can also be an option, witch don't exclude Wez. Both work great together.
-
-#### Great looking theme:
-
-Nobody needs 85 random colorschemes "out of the box", whatever the level of ChadNess. Rac@@n comes with the excellent Catppuccin flavors.
-
-To test out existing colorsschemes, use the `:Colors` command and cycle trough them for a preview. You can for sure install your favorite colorsheme plugin you like.
 
 #### Extendable to fit new needs
 

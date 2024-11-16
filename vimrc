@@ -10,6 +10,7 @@
 " ------------------------------------------------- 
 " URL     : https://github.com/AndiKod/racoon.vim 
 " :help   : https://vimhelp.org
+" Version : 1.0.0
 "-------------------------------------------------- 
 
 " <za> on {{{ folds }}} will toggle them ;)
@@ -30,18 +31,16 @@ call plug#begin()
   Plug 'ap/vim-buftabline'
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
-  Plug 'scrooloose/nerdtree'
-  Plug 'ryanoasis/vim-devicons'
-  Plug 'PhilRunninger/nerdtree-visual-selection'
   Plug 'vim-airline/vim-airline'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-fugitive'
   Plug 'ap/vim-css-color'
   Plug 'catppuccin/vim', { 'as': 'catppuccin'  }
-  Plug 'mhinz/vim-startify'
-  Plug 'chriszarate/yazi.vim'
   Plug 'tribela/vim-transparent'
+  Plug 'mhinz/vim-startify'
+  " Plug 'preservim/nerdtree'
+  " Plug 'chriszarate/yazi.vim'
 call plug#end()
 
 " Plugins configs are below, with the Mappings
@@ -145,10 +144,9 @@ let g:mapleader = " "
 " The other <Esc> or <C-c>
 inoremap jj <Esc>
 
-" Edit .vimrc Settings
-nnoremap <Leader>ev :e $MYVIMRC <CR>
-" Source .vimrc
-nnoremap <F12> :so $MYVIMRC<CR>
+" Edit or Source vimrc Settings
+nnoremap <leader>ev :e $MYVIMRC<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
 
 
 " Netrw Files Browser
@@ -161,9 +159,12 @@ let g:netrw_banner=0
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+,\(^\|\s\s\)ntuser\.\S\+'
 autocmd FileType netrw set nolist
 
-" Local terminal to run things 
+" Integrated terminal  
 nnoremap <leader>t :term<CR>
-
+nnoremap <leader>tv :vert ter<CR>
+" Manually use one of the next commands: 
+" exit               # Close the terminal from within
+" To run a dev server, consider Terminal tabs, Tmux,...
 
 " CtrS from both modes and back to Normal
 nnoremap <C-s> :w <CR> :Prettier <cr>
@@ -195,8 +196,9 @@ autocmd InsertEnter,WinLeave * set nocursorline
 " &:BuffTabline
 
 set hidden
-nnoremap <tab> :bnext<CR>
-nnoremap <s><tab> :bprev<CR>
+nnoremap <Tab> :bnext<CR>
+nnoremap <S-Tab> :bprev<CR>
+nnoremap <leader>b :ls<CR>
 
 " --------------------------------------------
 
@@ -228,11 +230,19 @@ nnoremap <leader>x :bd <cr>
 " &:NerdTree
 
 " Toggle the sidebar 
-nnoremap <leader>e :NERDTreeToggle<CR>
+" nnoremap <leader>e :NERDTreeToggle<CR>
 
 " NerdTree Files management
 " Hit m when hovering a file/folder
 " Pick the needed option: a to add, etc
+"
+
+" --------------------------------------------
+
+" &:Yazi 
+
+" nnoremap <silent> - :Yazi<cr>
+" nnoremap <silent> _ :YaziWorkingDirectory<cr>
 
 " --------------------------------------------
 
