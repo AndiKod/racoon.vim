@@ -41,7 +41,7 @@ VimPlug will install itself inside `.vim/autoload`, then procede to install the 
 
 ```vim
 " Auto install first extentions
-let g:coc_global_extensions = [ 'coc-vimlsp', 'coc-tabnine', 'coc-snippets', 'coc-prettier', 'coc-pairs', 'coc-html', 'coc-eslint', 'coc-emmet', 'coc-tsserver', 'coc-json', 'coc-css', '@yaegassy/coc-tailwindcss3' ]
+let g:coc_global_extensions = [ 'coc-vimlsp', 'coc-tabnine', 'coc-snippets', 'coc-prettier', 'coc-pairs', 'coc-html', 'coc-eslint', 'coc-emmet', 'coc-tsserver', 'coc-json', 'coc-css', '@yaegassy/coc-tailwindcss3', coc-sh ]
 ```
 
 You're ready to roll with snippets, auto completion, auto formating, AI assistant, live checking for errors, ...as a starting point. It's just a beginning.
@@ -150,6 +150,39 @@ To see the rest or add yours, head to the vimrc ;) and plugins/extentions docs.
 #### :Verbose
 
 You already know the esential parts, yet, here's some more :)
+
+### Bash Scripting LSP
+
+Via the awesome [webinstall.dev](https://webinstall.dev) tool, install [Shellcheck](https://webinstall.dev/shellcheck/) and [shfmt](https://webinstall.dev/shfmt/) with:
+
+```bash
+curl -sS https://webi.sh/shellcheck | sh
+```
+
+and
+
+```bash
+curl -sS https://webi.sh/shfmt | sh
+```
+
+...then run `:CocConfig` and setup the LSP with at least:
+
+```json
+{
+  "coc.preferences.formatOnSave": true,
+  "languageserver": {
+    "sh": {
+      "command": "shfmt",
+      "args": ["-i", "2", "-ci"], // Customize your options here
+      "filetypes": ["sh"],
+      "initializationOptions": {},
+      "settings": {}
+    }
+  }
+}
+```
+
+Running `:CocInstall coc-sh` won't hurt, and documentation is on the [coc-sh repo](https://github.com/josa42/coc-sh?tab=readme-ov-file)
 
 ### Some words about NERDTree & co
 

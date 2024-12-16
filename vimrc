@@ -1,17 +1,16 @@
-                          
+
 "                          ,,,
 "  Rac@@n.Vim           .'    `/\_/\
 "                     .'       <@I@>
 "          <((((((((((  )____(  \./
 "                     \( \(   \(\(
 "                      `-"`-"  " "
-"  - Playful little VimStarter for WebDev
+"  - Playful little VimStarter for WebDev & More
 
-" ------------------------------------------------- 
-" URL     : https://github.com/AndiKod/racoon.vim 
+" -------------------------------------------------
+" URL     : https://github.com/AndiKod/racoon.vim
 " :help   : https://vimhelp.org
-" Version : 1.0.0
-"-------------------------------------------------- 
+"--------------------------------------------------
 
 " <za> on {{{ folds }}} will toggle them ;)
 
@@ -49,7 +48,7 @@ call plug#end()
 " End of Plugins section
 " }}}
 
-" --- &:OPTIONS --- 
+" --- &:OPTIONS ---
 " {{{
 
 set nocompatible          " Disable Vi compatibility
@@ -58,10 +57,10 @@ set noshowmode            " Let VimAirline show the mode
 set encoding=utf-8
 
 " ::indentation
-set autoindent 
-set smartindent   
+set autoindent
+set smartindent
 set expandtab
-set smarttab 
+set smarttab
 set softtabstop=2
 set shiftwidth=2
 set shiftround
@@ -81,10 +80,10 @@ set numberwidth=2
 " set ruler
 set number              " Line numbers
 set relativenumber
-let &t_SI = "\e[6 q"    " Thin cursor for Insert mode 
+let &t_SI = "\e[6 q"    " Thin cursor for Insert mode
 let &t_EI = "\e[2 q"
 set showmatch           " Show parentheses matching
-set showcmd             " Show the normalMode command in status bar 
+set showcmd             " Show the normalMode command in status bar
 set matchpairs+=<:>     " append pairable chars to the default set '(:),{:},[:]'
 set signcolumn=yes
 
@@ -92,7 +91,7 @@ set signcolumn=yes
 " -- Use Git for backup --
 " ::backup/swap/info/undo settings
 set nobackup
-set nowritebackup 
+set nowritebackup
 set noswapfile
 
 " ::navigation
@@ -107,15 +106,15 @@ set mouse         =a             " Allow Mickey
 set scrolloff     =4
 set ignorecase
 set smartcase
-set tagcase       =match 
-               
+set tagcase       =match
+
 " ::vrac settings (aka misc)
 set clipboard     =unnamed  " clipboard yanks?
-set hidden                  " Switch buffer without saving  
+set hidden                  " Switch buffer without saving
 
 " ::wildMenu
 set wildmenu
-set wildmode=longest:full,list:full "Complete longest common string, 
+set wildmode=longest:full,list:full "Complete longest common string,
                                     " then list alternatives.
 
 " Having longer updatetime (default is 4000 ms = 4s) leads to noticeable
@@ -127,10 +126,10 @@ set updatetime=300
 "from: thevaluable.dev/fzf-vim-integration
 set rtp+=/usr/bin/fzf
 
-" End of the OPTIONS section 
+" End of the OPTIONS section
 " }}}
 
-" --- &:MAPPINGS + PluginsConfig --- : 
+" --- &:MAPPINGS + PluginsConfig --- :
 " {{{
 
 " ----------------------- /
@@ -159,10 +158,10 @@ let g:netrw_banner=0
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+,\(^\|\s\s\)ntuser\.\S\+'
 autocmd FileType netrw set nolist
 
-" Integrated terminal  
+" Integrated terminal
 nnoremap <leader>t :term<CR>
 nnoremap <leader>tv :vert ter<CR>
-" Manually use one of the next commands: 
+" Manually use one of the next commands:
 " exit               # Close the terminal from within
 " To run a dev server, consider Terminal tabs, Tmux,...
 
@@ -217,7 +216,7 @@ nnoremap <leader>sb :Buffers<cr>
 nnoremap <leader>sl :Lines<cr>
 " Search trough the content of the current buffer
 nnoremap <leader>sc :BLines<cr>
- 
+
 " --------------------------------------------
 
 " &:BuffLine
@@ -229,7 +228,7 @@ nnoremap <leader>x :bd <cr>
 
 " &:NerdTree
 
-" Toggle the sidebar 
+" Toggle the sidebar
 " nnoremap <leader>e :NERDTreeToggle<CR>
 
 " NerdTree Files management
@@ -239,24 +238,24 @@ nnoremap <leader>x :bd <cr>
 
 " --------------------------------------------
 
-" &:Yazi 
+" &:Yazi
 
 " nnoremap <silent> - :Yazi<cr>
 " nnoremap <silent> _ :YaziWorkingDirectory<cr>
 
 " --------------------------------------------
 
-" &:Prettier 
+" &:Prettier
 
-" Adding the :Prettier command 
+" Adding the :Prettier command
 command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
 
 " --------------------------------------------
 
 " &:Catppuccin
 
-set termguicolors 
-set background=dark 
+set termguicolors
+set background=dark
 colorscheme catppuccin_mocha
 let g:airline_theme = 'catppuccin_mocha'
 
@@ -272,22 +271,22 @@ let g:startify_disable_at_vimenter = 1
 nnoremap <leader>s :Startify<CR>
 
 let g:ascii = [
-      \'', 
+      \'',
       \'               . --- `/\_/\ ',
       \'             .:       <@I@> ',
       \'  <((((((((((  )____(  \./  ',
       \'             \( \(   \(\(   ',
       \'              `-"`-"  " "   ',
-\ '       Rac@@n say ...',  
+\ '       Rac@@n say ...',
 \]
 let g:asciiFooter = [
       \' Howdy mate, Rac@@n docs are on github.com/AndiKod/racoon ',
       \]
 
 let g:startify_custom_header = g:ascii + startify#fortune#boxed()
-let g:startify_custom_footer = g:asciiFooter  
+let g:startify_custom_footer = g:asciiFooter
 
-" Show other commands 
+" Show other commands
 let g:startify_enable_special = 1
 
 " Show last 5 paths in the lists
@@ -309,9 +308,9 @@ let g:startify_lists = [
 
 " --------------------------------------------
 
-" &:COC 
+" &:COC
 
-" pand by <Tab> C-n or C-p for next/previous 
+" pand by <Tab> C-n or C-p for next/previous
 inoremap <silent><expr> <tab> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
 " Auto install basic extentions
