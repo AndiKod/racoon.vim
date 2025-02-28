@@ -256,9 +256,13 @@ command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
 
 set termguicolors
 set background=dark
-colorscheme catppuccin_mocha
-let g:airline_theme = 'catppuccin_mocha'
 
+try
+  colorscheme catppuccin_mocha
+  let g:airline_theme = 'catppuccin_mocha'
+catch /^Vim\%((\a\+)\)\=:E185/
+  colorscheme default
+endtry
 
 " --------------------------------------------
 
@@ -314,7 +318,7 @@ let g:startify_lists = [
 inoremap <silent><expr> <tab> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
 " Auto install basic extentions
-let g:coc_global_extensions = [ 'coc-vimlsp', 'coc-tabnine', 'coc-snippets', 'coc-prettier', 'coc-pairs', 'coc-html', 'coc-eslint', 'coc-emmet', 'coc-tsserver', 'coc-json', 'coc-css', '@yaegassy/coc-tailwindcss3' ]
+let g:coc_global_extensions = [ 'coc-vimlsp', 'coc-tabnine', 'coc-snippets', 'coc-prettier', 'coc-pairs', 'coc-html', 'coc-eslint', 'coc-emmet', 'coc-tsserver', 'coc-json', 'coc-css', '@yaegassy/coc-tailwindcss3', 'coc-sh' ]
 " You can add or :CocInstall more to add support for Astro, Svelte, PHP ...
 
 

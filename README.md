@@ -153,6 +153,23 @@ You already know the esential parts, yet, here's some more :)
 
 ### Bash Scripting LSP
 
+The minimal :CocConfig setup, considering `coc-sh` is auto-installed by default :
+
+```json
+{
+  "languageserver": {
+    "bash": {
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["sh"]
+    }
+  }
+}
+```
+
+OR ...
+
+
 Via the awesome [webinstall.dev](https://webinstall.dev) tool, install [Shellcheck](https://webinstall.dev/shellcheck/) and [shfmt](https://webinstall.dev/shfmt/) with:
 
 ```bash
@@ -181,8 +198,6 @@ curl -sS https://webi.sh/shfmt | sh
   }
 }
 ```
-
-Running `:CocInstall coc-sh` won't hurt, and documentation is on the [coc-sh repo](https://github.com/josa42/coc-sh?tab=readme-ov-file)
 
 ### Some words about NERDTree & co
 
