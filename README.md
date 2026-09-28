@@ -13,6 +13,17 @@
 
 This minimal vimrc file will auto-configure Vim with some useful defaults for WebDev _(but not only)_, and it's minimal on purpose as it's just a starting point. Make your own Rac@@n pet. It's just Vim.
 
+---
+
+  /!\ Rac@@n.Vim will soon be back with an updated version! /!\
+
+  - CoC replacement with LSP servers
+  - Installation script for principal Servers
+  - GitHub Copilot integration for Free completions (or more)
+  - Updated README, to reflect the new features and the installation process
+
+---
+
 Some goals for a WebDev kickstart:
 
 - Ease of installation

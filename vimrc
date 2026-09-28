@@ -13,7 +13,13 @@
 "--------------------------------------------------
 
 " <za> on {{{ folds }}} will toggle them ;)
-
+"
+"  /!\ Rac@@n.Vim will soon be back with an updated version! /!\
+"  - CoC replacement with LSP servers
+"  - Installation script for principal Servers
+"  - GitHub Copilot integration for Free completions (or more)
+"  - Updated README, to reflect the new features and the installation process
+"
 " --- &:PLUGINS via VimPlug --- :
 " {{{
 
