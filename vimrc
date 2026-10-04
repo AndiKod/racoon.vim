@@ -6,20 +6,14 @@
 "                     \( \(   \(\(
 "                      `-"`-"  " "
 "  - Playful little VimStarter for WebDev & More
-
+"
 " -------------------------------------------------
 " URL     : https://github.com/AndiKod/racoon.vim
 " :help   : https://vimhelp.org
 "--------------------------------------------------
 
 " <za> on {{{ folds }}} will toggle them ;)
-"
-"  /!\ Rac@@n.Vim will soon be back with an updated version! /!\
-"  - CoC replacement with LSP servers
-"  - Installation script for principal Servers
-"  - GitHub Copilot integration for Free completions (or more)
-"  - Updated README, to reflect the new features and the installation process
-"
+
 " --- &:PLUGINS via VimPlug --- :
 " {{{
 
@@ -32,20 +26,43 @@ endif
 
 " Actual Plugins list:
 call plug#begin()
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  " --- LSP & Completion ---
+  Plug 'prabirshrestha/vim-lsp'
+  Plug 'prabirshrestha/asyncomplete.vim'
+  Plug 'prabirshrestha/asyncomplete-lsp.vim'
+  Plug 'prabirshrestha/asyncomplete-file.vim'
+  Plug 'prabirshrestha/asyncomplete-buffer.vim'
+
+  " --- Snippets (light, no Copilot needed) ---
+  " Comment out to opt-out.
+  Plug 'hrsh7th/vim-vsnip'
+  Plug 'hrsh7th/vim-vsnip-integ'
+  Plug 'prabirshrestha/asyncomplete-vsnip.vim'
+  Plug 'rafamadriz/friendly-snippets'
+
+  " --- Linting & Formatting ---
+  Plug 'dense-analysis/ale'
+
+  " --- AI Completion ---
+  Plug 'github/copilot.vim'
+
+  " --- Editing ---
+  Plug 'jiangmiao/auto-pairs'
+  Plug 'mattn/emmet-vim'
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-commentary'
+  Plug 'tpope/vim-fugitive'
+
+  " --- UI ---
   Plug 'ap/vim-buftabline'
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
   Plug 'vim-airline/vim-airline'
-  Plug 'tpope/vim-surround'
-  Plug 'tpope/vim-commentary'
-  Plug 'tpope/vim-fugitive'
   Plug 'ap/vim-css-color'
   Plug 'catppuccin/vim', { 'as': 'catppuccin'  }
   Plug 'tribela/vim-transparent'
   Plug 'mhinz/vim-startify'
-  " Plug 'preservim/nerdtree'
-  " Plug 'chriszarate/yazi.vim'
+  Plug 'preservim/nerdtree'
 call plug#end()
 
 " Plugins configs are below, with the Mappings
@@ -136,7 +153,7 @@ set rtp+=/usr/bin/fzf
 " }}}
 
 " --- &:MAPPINGS + PluginsConfig --- :
-" {{{
+"za {{{
 
 " ----------------------- /
 "  General Mappings       /
@@ -153,17 +170,6 @@ inoremap jj <Esc>
 nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
-
-" Netrw Files Browser
-nnoremap <leader>n :E<cr>
-augroup VimStartup
-au!
-au VimEnter * if expand("%") == "" | e . | endif
-augroup END
-let g:netrw_banner=0
-let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+,\(^\|\s\s\)ntuser\.\S\+'
-autocmd FileType netrw set nolist
-
 " Integrated terminal
 nnoremap <leader>t :term<CR>
 nnoremap <leader>tv :vert ter<CR>
@@ -172,8 +178,8 @@ nnoremap <leader>tv :vert ter<CR>
 " To run a dev server, consider Terminal tabs, Tmux,...
 
 " CtrS from both modes and back to Normal
-nnoremap <C-s> :w <CR> :Prettier <cr>
-inoremap <C-s> <Esc> :w <CR> :Prettier <cr>
+nnoremap <C-s> :w <CR> :ALEFix <cr>
+inoremap <C-s> <Esc> :w <CR> :ALEFix <cr>
 
 " Navigate the splits
 nnoremap <C-j> <C-w>j
@@ -193,6 +199,9 @@ xnoremap >  >gv
 " Line highlight, only in Normal mode
 autocmd InsertLeave,WinEnter * set cursorline
 autocmd InsertEnter,WinLeave * set nocursorline
+
+" Force .html files to html filetype (prevent htmldjango misdetection)
+autocmd BufRead,BufNewFile *.html set filetype=html
 
 " ------------------------------/
 "  Plugings specific Settings   /
@@ -235,26 +244,23 @@ nnoremap <leader>x :bd <cr>
 " &:NerdTree
 
 " Toggle the sidebar
-" nnoremap <leader>e :NERDTreeToggle<CR>
+nnoremap <leader>e :NERDTreeToggle<CR>
+
+" Minimal UI
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeAutoDeleteBuffer = 1
 
 " NerdTree Files management
 " Hit m when hovering a file/folder
 " Pick the needed option: a to add, etc
-"
 
 " --------------------------------------------
 
-" &:Yazi
+" &:Transparency
 
-" nnoremap <silent> - :Yazi<cr>
-" nnoremap <silent> _ :YaziWorkingDirectory<cr>
-
-" --------------------------------------------
-
-" &:Prettier
-
-" Adding the :Prettier command
-command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
+let g:transparent_enabled = v:true
+nnoremap <leader>tt :TransparentToggle<CR>
 
 " --------------------------------------------
 
@@ -293,7 +299,7 @@ let g:asciiFooter = [
       \' Howdy mate, Rac@@n docs are on github.com/AndiKod/racoon ',
       \]
 
-let g:startify_custom_header = g:ascii + startify#fortune#boxed()
+let g:startify_custom_header = exists('*startify#fortune#boxed') ? g:ascii + startify#fortune#boxed() : g:ascii
 let g:startify_custom_footer = g:asciiFooter
 
 " Show other commands
@@ -318,47 +324,99 @@ let g:startify_lists = [
 
 " --------------------------------------------
 
-" &:COC
+" &:vim-lsp
 
-" pand by <Tab> C-n or C-p for next/previous
-inoremap <silent><expr> <tab> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+function! s:on_lsp_buffer_enabled() abort
+  setlocal omnifunc=lsp#complete
+  setlocal signcolumn=yes
+  nmap <buffer> gd <plug>(lsp-definition)
+  nmap <buffer> gy <plug>(lsp-type-definition)
+  nmap <buffer> gi <plug>(lsp-implementation)
+  nmap <buffer> gr <plug>(lsp-references)
+  nmap <buffer> [g <plug>(lsp-previous-diagnostic)
+  nmap <buffer> ]g <plug>(lsp-next-diagnostic)
+  nmap <buffer> K <plug>(lsp-hover)
+endfunction
 
-" Auto install basic extentions
-let g:coc_global_extensions = [ 'coc-vimlsp', 'coc-tabnine', 'coc-snippets', 'coc-prettier', 'coc-pairs', 'coc-html', 'coc-eslint', 'coc-emmet', 'coc-tsserver', 'coc-json', 'coc-css', '@yaegassy/coc-tailwindcss3', 'coc-sh' ]
-" You can add or :CocInstall more to add support for Astro, Svelte, PHP ...
+augroup lsp_install
+  au!
+  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
 
+" --------------------------------------------
 
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+" &:asyncomplete + vsnip (generic completion + snippets, no Copilot needed)
 
-" GoTo code navigation
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <CR>    pumvisible() ? asyncomplete#close_popup() : "\<CR>"
+let g:asyncomplete_auto_popup = 1
+let g:asyncomplete_auto_completeopt = 0
 
-" Use K to show documentation in preview window
-nnoremap <silent> K :call ShowDocumentation()<CR>
+" vsnip expand / jump (Insert + Select modes).
+" <Tab> stays for asyncomplete, <C-j>/<C-l> are for snippets only.
+imap <expr> <C-j> vsnip#expandable() ? '<Plug>(vsnip-expand)' : '<C-j>'
+smap <expr> <C-j> vsnip#expandable() ? '<Plug>(vsnip-expand)' : '<C-j>'
+imap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+smap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
 
-" Mappings for CoCList
-" Show all diagnostics
-nnoremap <silent><nowait> <Leader>cd  :<C-u>CocList diagnostics<cr>
-" Manage [c]oc e[x]tensions
-nnoremap <silent><nowait> <Leader>cx  :<C-u>CocList extensions<cr>
-" Show commands
-nnoremap <silent><nowait> <Leader>cc  :<C-u>CocList commands<cr>
-" Find symbol of current document
-nnoremap <silent><nowait> <Leader>co  :<C-u>CocList outline<cr>
-" Search workspace symbols
-nnoremap <silent><nowait> <Leader>cs  :<C-u>CocList -I symbols<cr>
-" Do default action for next item
-nnoremap <silent><nowait> <Leader>cj  :<C-u>CocNext<CR>
-" Do default action for previous item
-nnoremap <silent><nowait> <Leader>ck  :<C-u>CocPrev<CR>
-" Resume latest coc list
-nnoremap <silent><nowait> <Leader>cp  :<C-u>CocListResume<CR>
+" Register vsnip as an asyncomplete source (shows snippets in the popup).
+autocmd User asyncomplete_setup call asyncomplete#register_source(
+  \ asyncomplete#sources#vsnip#get_source_options({
+  \   'name': 'vsnip',
+  \   'whitelist': ['*'],
+  \   'completor': function('asyncomplete#sources#vsnip#completor'),
+  \ }))
+
+" --------------------------------------------
+
+" &:ALE (linting + formatting)
+
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['prettier'],
+\   'typescript': ['prettier'],
+\   'css': ['prettier'],
+\   'html': ['prettier'],
+\   'json': ['prettier'],
+\   'sh': ['shfmt'],
+\}
+let g:ale_fix_on_save = 1
+let g:ale_lint_on_save = 1
+
+" --------------------------------------------
+
+" &:Copilot (installed but OFF by default — opt-in via <leader>ct)
+
+" Don't steal <Tab> from asyncomplete/vsnip. Use <C-y> to accept instead.
+let g:copilot_no_tab_map = v:true
+let g:copilot_enabled = 0
+imap <silent><script><expr> <C-y> copilot#Accept("\<CR>")
+
+" Toggle Copilot on/off
+function! ToggleCopilot()
+  if exists('*copilot#Enabled') && copilot#Enabled()
+    Copilot disable
+    echo "Copilot: Disabled"
+  else
+    Copilot enable
+    echo "Copilot: Enabled"
+  endif
+endfunction
+
+" Map the toggle to <leader>ct in Normal mode
+nnoremap <leader>ct :call ToggleCopilot()<CR>
+
+" --------------------------------------------
+
+" &:Emmet
+
+" <C-u> expands Emmet abbreviations (kept separate from Copilot <C-y>).
+let g:user_emmet_expandabbr_key = '<C-u>'
+
+" Make expansions work in all files
+let g:user_emmet_install_global = 1
+
 
 " --------------------------------------------
 
