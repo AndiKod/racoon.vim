@@ -141,38 +141,66 @@ To fully opt-out, comment `Plug 'github/copilot.vim'` in `vimrc`, then `:PlugCle
 
 `<Leader>` = `Space`
 
+### Generic
+
 | Binding | Action |
 |---------|--------|
 | `jj` | Escape (from insert mode) |
 | `<C-s>` | Save + format (ALEFix) |
-| `<Tab>` / `<S-Tab>` (insert, popup open) | Next/previous completion item |
-| `<CR>` (insert, popup open) | Confirm completion |
-| `<C-u>` | Expand Emmet abbreviation |
-| `<leader>ff` | Find files (fzf) |
-| `<leader>fg` | Find git files (fzf) |
-| `<leader>fh` | File history (fzf) |
-| `<leader>sb` | Search buffers (fzf) |
-| `<leader>sl` | Search content of all open buffers |
-| `<leader>sc` | Search current buffer (fzf) |
+| `<Esc>` | Remove search highlight |
+| `<C-h/j/k/l>` | Navigate splits |
+| `gcc` | Toggle comment the line |
+| `>` / `<` | Indent keeping selection |
+| `<leader>ev` / `<leader>sv` | Edit / source vimrc |
+
+### Files Explorer (NERDTree)
+
+| Binding | Action |
+|---------|--------|
 | `<C-n>` | Toggle NERDTree |
 | `<leader>n` | Focus NERDTree |
 | `<C-f>` | Find current file in NERDTree |
-| `<Tab>` / `<S-Tab>` (normal) | Next/previous buffer |
-| `<leader>b` | List buffers |
-| `<leader>x` | Close buffer |
-| `<leader>t` / `<leader>tv` | Terminal (horizontal/vertical) |
-| `<C-h/j/k/l>` | Navigate splits |
-| `<leader>ev` / `<leader>sv` | Edit / source vimrc |
-| `<leader>s` | Open Startify |
-| `<leader>ct` | Copilot Toggle |
-| `gcc` | Toggle comment the line |
-| `>` / `<` | Indent keeping selection |
+| `?` | From inside the NERDTree sidebar: Commands List |
+
+Note: Files explorer will auto-close when a file is selected.
+Extra command `:Nroot` — open tree at project root (git/hg/svn...).
+
+### Fuzzy Finding (fzf)
+
+| Binding | Action |
+|---------|--------|
+| `<leader>ff` | Find files |
+| `<leader>fg` | Find git files |
+| `<leader>fh` | File history |
+| `<leader>sb` | Search open buffers |
+| `<leader>sl` | Search content of all open buffers |
+| `<leader>sc` | Search current buffer |
+
+### LSP & Completion
+
+| Binding | Action |
+|---------|--------|
+| `<Tab>` / `<S-Tab>` (insert, popup open) | Next / previous completion item |
+| `<CR>` (insert, popup open) | Confirm completion |
+| `<C-u>` | Expand Emmet abbreviation |
 | `gd` | Go to definition |
 | `gy` | Go to type definition |
 | `gi` | Go to implementation |
 | `gr` | Find references |
-| `[g` / `]g` | Previous/next diagnostic |
+| `[g` / `]g` | Previous / next diagnostic |
 | `K` | Show documentation |
+
+### Other Utilities
+
+| Binding | Action |
+|---------|--------|
+| `<Tab>` / `<S-Tab>` (normal) | Next / previous buffer |
+| `<leader>b` | List buffers |
+| `<leader>x` | Close buffer |
+| `<leader>t` / `<leader>tv` | Terminal (horizontal / vertical) |
+| `<leader>s` | Open Startify |
+| `<leader>ct` | Copilot toggle |
+| `<leader>tt` | Transparency toggle |
 
 ---
 
