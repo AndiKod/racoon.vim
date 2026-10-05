@@ -13,7 +13,8 @@
 "--------------------------------------------------
 
 " <za> on {{{ folds }}} will toggle them ;)
-
+"
+" --- &:Racoon.Vim --- :
 " --- &:PLUGINS via VimPlug --- :
 " {{{
 
@@ -32,13 +33,6 @@ call plug#begin()
   Plug 'prabirshrestha/asyncomplete-lsp.vim'
   Plug 'prabirshrestha/asyncomplete-file.vim'
   Plug 'prabirshrestha/asyncomplete-buffer.vim'
-
-  " --- Snippets (light, no Copilot needed) ---
-  " Comment out to opt-out.
-  Plug 'hrsh7th/vim-vsnip'
-  Plug 'hrsh7th/vim-vsnip-integ'
-  Plug 'prabirshrestha/asyncomplete-vsnip.vim'
-  Plug 'rafamadriz/friendly-snippets'
 
   " --- Linting & Formatting ---
   Plug 'dense-analysis/ale'
@@ -243,13 +237,31 @@ nnoremap <leader>x :bd <cr>
 
 " &:NerdTree
 
-" Toggle the sidebar
-nnoremap <leader>e :NERDTreeToggle<CR>
+" Toggle tree
+nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <leader>n :NERDTreeFocus<CR>
+
+" Find current file in tree
+nnoremap <C-f> :NERDTreeFind<CR>
+
+" Open tree at project root (git/hg/svn...)
+command! Nroot :NERDTreeVCS
+
+" Auto-close NerdTree if it's the last window
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+
+" Close tree after opening a file
+let NERDTreeQuitOnOpen = 1
+
+" Same tree on every page
+autocmd BufWinEnter * if &buftype != 'quickfix' && getcmdwintype() == '' | silent NERDTreeMirror | endif
+
 
 " Minimal UI
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeAutoDeleteBuffer = 1
+let NERDTreeWinSize = 28
 
 " NerdTree Files management
 " Hit m when hovering a file/folder
@@ -345,28 +357,13 @@ augroup END
 
 " --------------------------------------------
 
-" &:asyncomplete + vsnip (generic completion + snippets, no Copilot needed)
+" &:asyncomplete
 
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <CR>    pumvisible() ? asyncomplete#close_popup() : "\<CR>"
 let g:asyncomplete_auto_popup = 1
 let g:asyncomplete_auto_completeopt = 0
-
-" vsnip expand / jump (Insert + Select modes).
-" <Tab> stays for asyncomplete, <C-j>/<C-l> are for snippets only.
-imap <expr> <C-j> vsnip#expandable() ? '<Plug>(vsnip-expand)' : '<C-j>'
-smap <expr> <C-j> vsnip#expandable() ? '<Plug>(vsnip-expand)' : '<C-j>'
-imap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
-smap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
-
-" Register vsnip as an asyncomplete source (shows snippets in the popup).
-autocmd User asyncomplete_setup call asyncomplete#register_source(
-  \ asyncomplete#sources#vsnip#get_source_options({
-  \   'name': 'vsnip',
-  \   'whitelist': ['*'],
-  \   'completor': function('asyncomplete#sources#vsnip#completor'),
-  \ }))
 
 " --------------------------------------------
 
@@ -386,12 +383,7 @@ let g:ale_lint_on_save = 1
 
 " --------------------------------------------
 
-" &:Copilot (installed but OFF by default — opt-in via <leader>ct)
-
-" Don't steal <Tab> from asyncomplete/vsnip. Use <C-y> to accept instead.
-let g:copilot_no_tab_map = v:true
-let g:copilot_enabled = 0
-imap <silent><script><expr> <C-y> copilot#Accept("\<CR>")
+" &:Copilot
 
 " Toggle Copilot on/off
 function! ToggleCopilot()
@@ -411,11 +403,17 @@ nnoremap <leader>ct :call ToggleCopilot()<CR>
 
 " &:Emmet
 
-" <C-u> expands Emmet abbreviations (kept separate from Copilot <C-y>).
+" Set Ctrl+y as the direct expand trigger
 let g:user_emmet_expandabbr_key = '<C-u>'
 
 " Make expansions work in all files
 let g:user_emmet_install_global = 1
+
+
+" --- Potential leftover --- "
+" The classic leaderKey + , to expand
+" let g:user_emmet_leader_key = '<C-y>
+
 
 
 " --------------------------------------------

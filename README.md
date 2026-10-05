@@ -38,9 +38,8 @@ The bootstrap script is just a convenience. You don't have to use it — if you 
 
 - **LSP** — vim-lsp + asyncomplete (go-to-definition, hover docs, diagnostics)
 - **Completion** — asyncomplete (LSP + buffer words + file paths, auto-popup, no account needed)
-- **Snippets** — vim-vsnip + friendly-snippets (2k+ VSCode-style snippets, works offline)
 - **Linting & Formatting** — ALE with Prettier (fix on save)
-- **AI Completion** — GitHub Copilot (installed but OFF by default, opt-in, free tier available)
+- **AI Completion** — GitHub Copilot (toggle with `<leader>ct`)
 - **Fuzzy Finding** — fzf.vim (files, git files, history, buffers, lines)
 - **File Browsing** — NERDTree
 - **Buffer Management** — vim-buftabline + Tab/S-Tab cycling
@@ -61,7 +60,6 @@ The bootstrap script is just a convenience. You don't have to use it — if you 
 | Category | Plugins |
 |----------|---------|
 | LSP & Completion | vim-lsp, asyncomplete.vim, asyncomplete-lsp.vim, asyncomplete-file.vim, asyncomplete-buffer.vim |
-| Snippets | vim-vsnip, vim-vsnip-integ, asyncomplete-vsnip.vim, friendly-snippets |
 | Linting & Formatting | dense-analysis/ale |
 | AI | github/copilot.vim |
 | Editing | vim-surround, vim-commentary, vim-fugitive, auto-pairs, emmet-vim |
@@ -115,32 +113,27 @@ To add more servers, install them globally the same way and register in vim-lsp.
 
 ---
 
-## Completion & Snippets (no Copilot needed)
+## Completion (no Copilot needed)
 
 Works out of the box, offline, no account:
 
-* Start typing → popup appears (LSP + snippets + buffer words + file paths)
+* Start typing → popup appears (LSP + buffer words + file paths)
 * `<Tab>` / `<S-Tab>` → next / previous item in popup
 * `<CR>` → confirm selection
-* `<C-j>` → expand snippet
-* `<C-l>` → jump to next snippet placeholder
 * `<C-u>` → expand Emmet (e.g. `div.list>ul>li*3`)
-
-Snippets come from `friendly-snippets` (JS/TS/React/HTML/CSS/JSON/Sh/...). To opt-out, comment the `Snippets` `Plug` lines in `vimrc`, then `:PlugClean`.
 
 ---
 
 ## Copilot
 
-GitHub Copilot is installed but **OFF by default**. It coexists with the above — it uses ghost text, not the popup, and does not steal `<Tab>`.
+GitHub Copilot is installed for AI completion.
 
 To activate:
 
 1. Run `:Copilot setup` and follow the GitHub device auth flow
 2. Toggle on/off with `<leader>ct`
-3. Accept a suggestion with `<C-y>` (`<Tab>` stays for completion/snippets)
 
-Free tier includes 2,000 completions/month. [Details](https://github.com/github/copilot.vim). To fully opt-out, comment `Plug 'github/copilot.vim'` in `vimrc`, then `:PlugClean`.
+To fully opt-out, comment `Plug 'github/copilot.vim'` in `vimrc`, then `:PlugClean`.
 
 ---
 
@@ -154,15 +147,16 @@ Free tier includes 2,000 completions/month. [Details](https://github.com/github/
 | `<C-s>` | Save + format (ALEFix) |
 | `<Tab>` / `<S-Tab>` (insert, popup open) | Next/previous completion item |
 | `<CR>` (insert, popup open) | Confirm completion |
-| `<C-j>` / `<C-l>` | Expand snippet / jump to next placeholder |
 | `<C-u>` | Expand Emmet abbreviation |
-| `<C-y>` | Accept Copilot suggestion |
 | `<leader>ff` | Find files (fzf) |
 | `<leader>fg` | Find git files (fzf) |
 | `<leader>fh` | File history (fzf) |
 | `<leader>sb` | Search buffers (fzf) |
+| `<leader>sl` | Search content of all open buffers |
 | `<leader>sc` | Search current buffer (fzf) |
-| `<leader>e` | Toggle NERDTree |
+| `<C-n>` | Toggle NERDTree |
+| `<leader>n` | Focus NERDTree |
+| `<C-f>` | Find current file in NERDTree |
 | `<Tab>` / `<S-Tab>` (normal) | Next/previous buffer |
 | `<leader>b` | List buffers |
 | `<leader>x` | Close buffer |
