@@ -57,6 +57,13 @@ call plug#begin()
   Plug 'tribela/vim-transparent'
   Plug 'mhinz/vim-startify'
   Plug 'preservim/nerdtree'
+
+  " --- Plugins IA spécifiques à Neovim (Pack Go OpenCode) ---
+if has('nvim')
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'milanglacier/minuet-ai.nvim'
+endif
+
 call plug#end()
 
 " Plugins configs are below, with the Mappings
@@ -174,6 +181,10 @@ nnoremap <leader>tv :vert ter<CR>
 " CtrS from both modes and back to Normal
 nnoremap <C-s> :w <CR> :ALEFix <cr>
 inoremap <C-s> <Esc> :w <CR> :ALEFix <cr>
+" CtrQ from both modes too Save & Quit
+nnoremap <C-q> :wq <CR>
+inoremap <C-q> <Esc> :wq <CR>
+
 
 " Navigate the splits
 nnoremap <C-j> <C-w>j
@@ -417,6 +428,69 @@ let g:user_emmet_install_global = 1
 
 
 " --------------------------------------------
+"
+
+" --- Configuration spécifique à Neovim / Minuet AI ---
+if has('nvim')
+
+" Copilot.vim ferait doublon avec Minuet (deux ghost texts concurrents)
+if exists(':Copilot') == 2
+  Copilot disable
+endif
+
+lua << EOF
+-- Identifiant de session stable pour toute la session Neovim
+local opencode_session = 'ses_nvim_' .. vim.fn.sha256(vim.fn.getcwd()):sub(1, 12)
+
+require('minuet').setup {
+  provider = 'openai_compatible',
+  n_completions = 1,
+  context_window = 1024,
+  -- Go répond en ~1,2 s : 3 s coupait les réponses en plein milieu
+  request_timeout = 10,
+  throttle = 1000,
+  debounce = 300,
+  provider_options = {
+    openai_compatible = {
+      name = 'OpenCode Go',
+      api_key = 'OPENCODE_API_KEY',
+      end_point = 'https://opencode.ai/inference/go/openai/v1/chat/completions',
+      model = 'qwen3.8-flash',
+      stream = true,
+      transform = {
+        function(data)
+          data.headers['x-opencode-session'] = opencode_session
+          data.headers['User-Agent'] = 'minuet-ai.nvim/1.0'
+          return data
+        end,
+      },
+      optional = {
+        max_tokens = 200,
+        top_p = 0.9,
+        -- sinon le modèle "réfléchit" et sort du raisonnement au lieu de code
+        enable_thinking = false,
+      },
+    },
+  },
+  virtualtext = {
+    auto_trigger_ft = {
+      'python', 'lua', 'javascript', 'javascriptreact',
+      'typescript', 'typescriptreact', 'go', 'rust', 'c', 'cpp',
+      'markdown', 'html', 'css', 'scss', 'json', 'yaml',
+      'sh', 'vim', 'php', 'vue', 'svelte', 'sql',
+    },
+    keymap = {
+      -- <Leader>a = espace+a en insertion : acceptait pendant la frappe
+      accept = '<A-a>',
+      accept_line = '<A-l>',
+      next = '<A-n>',
+      prev = '<A-p>',
+      dismiss = '<A-e>',
+    },
+  },
+}
+EOF
+endif
 
 " End of Mappings section
 " }}}
