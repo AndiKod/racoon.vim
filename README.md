@@ -147,11 +147,18 @@ To fully opt-out, comment `Plug 'github/copilot.vim'` in `vimrc`, then `:PlugCle
 |---------|--------|
 | `jj` | Escape (from insert mode) |
 | `<C-s>` | Save + format (ALEFix) |
+| `<C-q>` | Save & quit (`:wq`) |
+| `<leader>Q` | Force quit, discard changes (`:q!`) |
+| `<leader>z` | Undo (Notepad-style alias for `u`; native Ctrl+Z still suspends Vim) |
 | `<Esc>` | Remove search highlight |
 | `<C-h/j/k/l>` | Navigate splits |
 | `gcc` | Toggle comment the line |
 | `>` / `<` | Indent keeping selection |
 | `<leader>ev` / `<leader>sv` | Edit / source vimrc |
+
+> **Terminal flow control:** if `<C-s>` / `<C-q>` don't fire in your terminal, software flow control (`ixon`) is swallowing them. Add `stty -ixon` to your shell rc (`.bashrc` / `.zshrc`) — or run `stty -ixon` in the current shell. Racoon's `<leader>Q` is always available as a reliable fallback for force-quit.
+
+> **Undo from insert mode:** press `<C-o>u` to undo the last change without leaving insert mode (Vim runs one normal command, `u`, then returns to insert). `<leader>z` is the normal-mode alias for `u`.
 
 ### Files Explorer (NERDTree)
 

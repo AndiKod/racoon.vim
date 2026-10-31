@@ -31,3 +31,6 @@ if ! command -v prettier &> /dev/null; then
 fi
 
 echo "Done! Open Vim and LSP will just work."
+echo ""
+echo "Tip: if Ctrl+s / Ctrl+q don't fire in your terminal, software flow"
+echo "     control (ixon) is swallowing them. Add 'stty -ixon' to your shell rc."

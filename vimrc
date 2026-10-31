@@ -185,6 +185,13 @@ inoremap <C-s> <Esc> :w <CR> :ALEFix <cr>
 nnoremap <C-q> :wq <CR>
 inoremap <C-q> <Esc> :wq <CR>
 
+" Force quit (discard changes) — on Leader key to avoid Ctrl+q/Ctrl+Q case
+" accidents in terminals. Destructive: discards unsaved changes.
+nnoremap <leader>Q :q!<CR>
+
+" Undo — Notepad-style Ctrl+Z alias (normal mode; keeps native Ctrl+Z = suspend Vim)
+" In insert mode, use the native <C-o>u (undo without leaving insert).
+nnoremap <leader>z u
 
 " Navigate the splits
 nnoremap <C-j> <C-w>j
